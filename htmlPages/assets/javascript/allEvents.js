@@ -3,6 +3,8 @@ $(document).ready(function () {
    $.get("/api/events", function(data) {
         // (data) is two things
         // 1) userId - This is the current logged in users ID
+        // Check back to event-api-route.js when a GET with a route of api/events
+        // to see how we are getting (data)
         // 2) ResultsArr - This is an array that holds all of the events
         // You can see it in the console in the browser
         console.log(data);
