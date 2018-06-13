@@ -63,13 +63,15 @@ body, html {
   #mainImg{
     max-width:100%;
     height: auto;
-    padding-right:15px;
-    padding-top: 50px;
+    margin-top: 50px;
+    padding: 10px;
+    border: 1px double #000;
+
   }
   #imgDiv{
-    width: 100%;
     
     object-fit: fill;
+    
   }
   
   #introduction{
