@@ -53,7 +53,25 @@ $(document).ready(function () {
             // If an error occurs log it in the console
             console.log(err);
         });
-    }
+    };
+});
+
+//Clear validation error messages on input
+$("#eventTitle").on("input", function(){
+    $(this).removeClass("is-danger");
+    $("#eventNameHelp").hide()
+});
+$("#eventDate").on("input", function(){
+    $(this).removeClass("is-danger");
+    $("#eventDateHelp").hide()
+});
+$("#eventLocation").on("input", function(){
+    $(this).removeClass("is-danger");
+    $("#eventLocationHelp").hide()
+});
+$("#eventDetails").on("input", function(){
+    $(this).removeClass("is-danger");
+    $("#eventDetailsHelp").hide()
 });
 
 //Client Input Validation function
