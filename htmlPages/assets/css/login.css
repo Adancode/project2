@@ -6,6 +6,7 @@ body, html {
   color: #000;
   min-height: 100%;
 }
+
 header {
   background-image: url('../images/loginpink.jpg');
   background-size: cover;
@@ -59,6 +60,10 @@ h3 {
   width: 14w;
   padding-top: 10px;
   max-width: 275px;
+}
+#logoBox:hover {
+  filter: invert(50%);
+  
 }
 #whiteSpace {
   margin: 0 auto;
