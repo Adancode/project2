@@ -63,13 +63,15 @@ body, html {
   #mainImg{
     max-width:100%;
     height: auto;
-    padding-right:15px;
-    padding-top: 50px;
+    margin-top: 50px;
+    padding: 10px;
+    border: 1px double #000;
+
   }
   #imgDiv{
-    width: 100%;
     
     object-fit: fill;
+    
   }
   
   #introduction{
@@ -148,3 +150,13 @@ body, html {
     /* animation: 3s ease-out 0s 1 slideInFromRight; */
     padding-right: 15px;
   } 
+
+  /* NAV FIX FOR mission page, */
+  /* adds a minor tiled wallpaper to hide nav elements */
+  .notHeader {
+    position: relative;
+    z-index: 4;
+    background-image: url('../images/linedpaper.png');
+    background-attachment: fixed;
+    background-size: auto;
+    }
