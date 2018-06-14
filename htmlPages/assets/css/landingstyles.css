@@ -7,11 +7,12 @@ body, html {
 }
 
 #whatIsMarketToMarket {
-  font-size: 1.2em;
-  color: rgb(255, 255, 255);
-  text-shadow: #FFEDE5 1px 1px;
+  font-size: 1.4em;
+  color: #FFEDE5;
+  text-shadow: #fff 1px 1px, 0 0 25px white, 0 0 10px rgb(141, 137, 135);
   background-color: rgba(218, 224, 233, 0);
   border-radius: 15px;
+  
 }
 #missionButton {
   color: #fff;
