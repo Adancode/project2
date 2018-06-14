@@ -1,138 +1,188 @@
 $(document).ready(function () {
+    //Getting the inputs using jQuery
+    var firstName = $("#firstName");
+    var lastName = $("#lastName");
+    var email = $("#emailInput");
+    var password = $("#password");
+    var emailConfirm = $("#confirmSignupEmail");
+    var passwordConfirm = $("#passwordConf");
 
+    var username = firstName + " " + lastName;
+
+    //After the user fills out the form, run this
     $(".button-primary").on("click", function (event) {
         event.preventDefault();
-        // If the sign up passes validation move forward with
-        // grabbing user info
-        if (validateForm() === true) {
-
-            var firstName = $("#firstName").val().trim();
-            var lastName = $("#lastName").val().trim();
-            var email = $("#emailInput").val().trim();
-            var password = $("#password").val().trim();
-            // Setting the username to fistname lastname
-            var username = firstName + " " + lastName;
-            // Calling the addUser function with username, email, and password
-            // as arguments
-            addUser(username, email, password);
-        } else {
-            // Logging when validation fails for giggles
-            console.log("failed validation");
+        //Setting signupData to the input values
+        var signupData = {
+            firstName: firstName.val().trim(),
+            lastName: lastName.val().trim(),
+            email: email.val().trim(),
+            password: password.val().trim(),
+            emailConfirm: emailConfirm.val().trim(),
+            passwordConfirm: passwordConfirm.val().trim()
         }
 
+        //Client Input Validation 
+       if (validateForm(signupData.firstName, signupData.lastName,signupData.email, signupData.password, signupData.emailConfirm, signupData.passwordConfirm)) {
+
+        var username = signupData.firstName + " " + signupData.lastName;
+
+        console.log(firstName);
+        console.log(lastName);
+        console.log(username);
+        console.log(email);
+        console.log(password);
+        
+        //Calling the addUser function with the parameters username, email, password
+        addUser(username, signupData.email, signupData.password);
+        } 
+        else {
+            console.log("failed validation");
+        };
+       
     });
 
-    // addUser is the function that will sign up and login the user when called
+    //addUser function
     function addUser(username, email, password) {
-        // This post will sign the user up
         $.post("/api/users", {
             username: username,
             email: email,
             password: password
-        }).then(function (data) {
-            // This post will run after the user has be signed up
-            // and log the user in
+        }).then(function(data) {
+            console.log("Logging user in");
             $.post("/api/login", {
                 email: email,
                 password: password
-            }).then(function (data) {
-                // Send the user to the page they were going to before they
-                // needed to sign up
+            }).then(function(data) {
+                console.log(data);
+                console.log("did this work");
                 window.location.replace(data);
             });
         });
-    }
+    };
 
-    function validateForm() {
+    $("#firstName").on("input", function(){
+        $(this).removeClass("is-danger");
+        $("#firstNameHelp").hide()
+    });
+    $("#lastName").on("input", function(){
+        $(this).removeClass("is-danger");
+        $("#lastNameHelp").hide()
+    });
+    $("#emailInput").on("input", function(){
+        $(this).removeClass("is-danger");
+        $("#emailInputHelp").hide()
+    });
+    $("#password").on("input", function(){
+        $(this).removeClass("is-danger");
+        $("#passwordHelp").hide()
+    });
+    $("#confirmSignupEmail").on("input", function(){
+        $(this).removeClass("is-danger");
+        $("#confirmSignupEmailHelp").hide()
+    });
+    $("#passwordConf").on("input", function(){
+        $(this).removeClass("is-danger");
+        $("#passwordConfHelp").hide()
+    });
 
-        var fname = $("#firstName").val().trim();
-        var lname = $("#lastName").val().trim();
-        var email = $("#emailInput").val().trim();
-        var emailConfirm = $("#confirmSignupEmail").val().trim();
-        var password = $("#password").val().trim();
-        var passwordConfirm = $("#passwordConf").val().trim();
+    //Client Input Validation function
+    function validateForm(firstName, lastName, email, password, emailConfirm, passwordConfirm) {
 
-        if (fname == "") {
-            window.alert("First Name cannot be empty.");
-            $("#firstName").css("border", "red 4px solid");
+        var isValidForm = true;
 
-            return false;
+        if (firstName == "") {
+            $("#firstName").addClass("is-danger");
+            $("#firstNameHelp").show();
+            isValidForm = false;
         }
-        if (lname == "") {
-            window.alert("Last Name cannot be empty.");
-            $("#lastName").css("border", "red 4px solid");
-            return false;
+        if (lastName == "") {
+            $("#lastName").addClass("is-danger");
+            $("#lastNameHelp").show();
+            isValidForm = false;
         }
         if (email == "") {
-            window.alert("E-mail cannot be empty.");
-            $("#emailInput").css("border", "red 4px solid");
-            return false;
+            $("#emailInput").addClass("is-danger");
+            $("#emailInputHelp").show();
+            isValidForm = false;
         }
         if (email.indexOf("@", 0) < 0) {
-            window.alert("Please enter a vallid e-mail address.");
-            $("#emailInput").css("border", "red 4px solid");
-            return false;
+            $("#emailInput").addClass("is-danger");
+            $("#emailInputHelp").text("Please enter a vallid e-mail address.").show();
+            isValidForm = false;
         }
+ 
         if (email.indexOf(".", 0) < 0) {
-            window.alert("Please enter a valid e-mail address.");
-            $("#emailInput").css("border", "red 4px solid");
-            return false;
+            $("#emailInput").addClass("is-danger");
+            $("#emailInputHelp").text("Please enter a vallid e-mail address.").show();
+            isValidForm = false;
         }
         if (emailConfirm == "") {
-            window.alert("Cannow be empty.");
-            $("#confirmSignupEmail").css("border", "red 4px solid");
-            return false;
+            $("#confirmSignupEmail").addClass("is-danger");
+            $("#confirmSignupEmailHelp").show();
+            isValidForm = false;
         }
         if (emailConfirm.indexOf("@", 0) < 0) {
-            window.alert("Please enter a vallid e-mail address.");
-            $("#confirmSignupEmail").css("border", "red 4px solid");
-            return false;
+            $("#confirmSignupEmail").addClass("is-danger");
+            $("#confirmSignupEmailHelp").text("Please enter a vallid e-mail address.").show();
+            isValidForm = false;
         }
         if (emailConfirm.indexOf(".", 0) < 0) {
-            window.alert("Please enter a valid e-mail address.");
-            $("#confirmSignupEmail").css("border", "red 4px solid");
-            return false;
+            $("#confirmSignupEmail").addClass("is-danger");
+            $("#confirmSignupEmailHelp").text("Please enter a vallid e-mail address.").show();
+            isValidForm = false;
         }
         if (email !== emailConfirm) {
-            window.alert("E-mails do not match. Please check your input.");
-            $("#confirmSignupEmail").css("border", "red 4px solid");
-            return false;
+            $("#confirmSignupEmail").addClass("is-danger");
+            $("#confirmSignupEmailHelp").text("E-mails do not match. Please check your input.").show();
+            isValidForm = false;
         }
         if (password == "") {
-            window.alert("Cannot be empty.");
-            $("#password").css("border", "red 4px solid");
-            return false;
+            $("#password").addClass("is-danger");
+            $("#passwordHelp").show();
+            isValidForm = false;
         }
         if (password.length < 8) {
-            window.alert("Password must be at least 8 characters.")
-            $("#password").css("border", "red 4px solid");
-            return false;
+            $("#password").addClass("is-danger");
+            $("#passwordHelp").text("Password must be at least 8 characters.").show();
+            isValidForm = false;
         }
         if (password.length > 16) {
-            window.alert("Password cannot be longer than 16 characters.")
-            $("#password").css("border", "red 4px solid");
-            return false;
+            $("#password").addClass("is-danger");
+            $("#passwordHelp").text("Password cannot be longer than 16 characters.").show();
+            isValidForm = false;
         }
         if (passwordConfirm == "") {
-            window.alert("Cannot be empty.");
-            $("#passwordConf").css("border", "red 4px solid");
-            return false;
+            $("#passwordConf").addClass("is-danger");
+            $("#passwordConfHelp").show();
+            isValidForm = false;
         }
         if (passwordConfirm.length < 8) {
-            window.alert("Password must be at least 8 characters.")
-            $("#passwordConf").css("border", "red 4px solid");
-            return false;
+            $("#passwordConf").addClass("is-danger");
+            $("#passwordConfHelp").text("Password must be at least 8 characters.").show();
+            isValidForm = false;
         }
         if (passwordConfirm.length > 16) {
-            window.alert("Password cannot be longer than 16 characters.")
-            $("#passwordConf").css("border", "red 4px solid");
-            return false;
+            $("#passwordConf").addClass("is-danger");
+            $("#passwordConfHelp").text("Password cannot be longer than 16 characters.").show();
+            isValidForm = false;
         }
         if (password !== passwordConfirm) {
-            window.alert("Passwords do not match. Please check your input.");
-            $("#passwordConf").css("border", "red 4px solid");
-            return false;
+            $("#passwordConf").addClass("is-danger");
+            $("#passwordConfHelp").text("Passwords do not match. Please check your input.").show();
+            isValidForm = false;
         }
-        return true;
+        return isValidForm;
     };
+
+    $("#navigation").on("change", function () {
+        console.log("redirect func running");
+        if (this.value === "events") {
+            window.location = "event.html"
+        } else if (this.value === "vendors") {
+            window.location = "vendor.html"
+        } else {
+            window.location = "landing.html"
+        }
+    });
 });

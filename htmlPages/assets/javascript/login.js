@@ -22,7 +22,6 @@ $(document).ready(function () {
         passwordInput.val("");
     });
 
-
     function loginUser(email, password) {
         console.log("hello");
         $.post("/api/login", {
@@ -44,7 +43,6 @@ $(document).ready(function () {
         $("#loginPasswordHelp").hide()
     });
 });
-
 
 function validateLoginForm(username, password) {
 

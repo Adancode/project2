@@ -17,8 +17,11 @@ module.exports = function (app) {
 
 
   app.get("/api/events", function (req, res) {
-    db.Event.findAll({}).then(function (result) {
-      res.json(result);
+    db.Event.findAll({}).then(function (results) {
+      var resultObj = {};
+      resultObj.userId = req.user.id;
+      resultObj.ResultsArr = results;
+      res.json(resultObj);
     });
   });
 
