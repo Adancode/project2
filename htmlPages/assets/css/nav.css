@@ -4,7 +4,9 @@
     height: 40px;
     margin-left: -75px;
     filter: invert(20%);
-    top: -10px;
+    top: -1px;
+    filter: invert(100%);
+    /* filter: drop-shadow(2px 2px 1px #000); */
   }
 .navbar {
   position: relative;
