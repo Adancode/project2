@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+     <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/skeleton.css">
+ 
+    <link rel="stylesheet" type="text/css" href="./assets/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/allevents.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/">
+    <title>Market to Market</title>
+    <link rel="icon" type="image/png" href="./assets/images/marketMT.png">
+</head>
+
+<body>
+   
+
+    <header>
+        <!-- BEGINING OF NAV SECTION -->
+    
+        <div class="navbar">
+           
+          <a href="/" id="homeUrl">
+            <div class="homeIconAni">
+              <img id="homeIcon" src="./assets/images/home.png" alt="Home">
+              <span id="homeText">HOME</span>
+            </div>
+          </a>
+          <!-- if loggedout offer login, if loggedin show username -->
+          <!-- USER is dummytext -->
+          <a href="#" id="userUrl">
+            <div class="homeIconAni">
+              <img id="userIcon" src="./assets/images/usericonOP.png" alt="User">
+              <span id="userText">USER</span>
+            </div>
+          </a>
+          <a href="/all-events" id="eventUrl">
+            <div class="homeIconAni">
+              <img id="eventIcon" src="./assets/images/calendar.png" alt="User">
+              <span id="eventsText">EVENTS</span>
+            </div>
+          </a>
+          <!-- Hide if not logged in -->
+          <a href="/logout" id="logoutUrl">
+            <div class="homeIconAni">
+              <img id="exitIcon" src="./assets/images/exit.png" alt="User">
+              <span id="logoutText">LOGOUT</span>
+            </div>
+          </a>
+          <img id="navLogo" src="./assets/images/market2marketplaylistscriptlonger.png" alt="">
+        </div>
+    
+        <!-- END OF NAV SECTION -->
+      </header>
+    
+      <div class="notHeader">
+        <div class="row">
+    
+          <div class="twelve columns" id="whiteSpace">
+    
+         
+    
+    
+      
+        <div class="row">
+          <div id="WouldYouLikeToAddAnEvent" class="six columns offset-by-three" style="text-align: center">
+            <h4></h4>
+            &nbsp&nbsp&nbsp&nbsp&nbsp Would you like to add an event? We make it incredibly simple to be seen and create visibility for your products and events. We'll help you find the right people to make it happen.
+            <br>
+            <a href="/event">
+              <div class="button" style="margin-top: 10px" id="createButton">
+                Create an Event</div>
+            </a>
+    
+    
+          </div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+  <br>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div id="eventsCard">
+                    <h3>TESTING AREA</h3>
+                    <div class="container" id="eventList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="./assets/javascript/allEvents.js"></script>
+    <script src="./assets/javascript/cards.js"></script>
+</body>
+
+</html>
