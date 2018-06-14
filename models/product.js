@@ -15,7 +15,14 @@ module.exports = (function (sequelize, DataTypes) {
     Product.belongsTo(models.User, {
       // foreignKey: {
       // allowNull: false
-      // }
+      // },
+      
+    });
+    Product.belongsTo(models.Event, {
+      // foreignKey: {
+      // allowNull: false
+      // },
+      
     });
   }
   return Product;
