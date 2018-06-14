@@ -15,23 +15,10 @@ html {
 font-size: 1.1em;
 
 }
-#homeIcon, #userIcon, #eventIcon, #exitIcon {
-  /* padding: 10px 5px 5px; */
-  
-  margin: 0px;
-  height: 30px;
-  width: 30px;
-  filter: contrast(100%);
-  /* background: #0000001e; */
-  /* testing animations */
-  
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  -o-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
-  
-  }
+header {
+  height: 35px;
+}
+
 footer {
   position: absolute;
   margin: 0 auto;
@@ -50,7 +37,7 @@ footer {
   position: relative;
   z-index: 4;
   background-image: url('../images/all-events.png');
-
+  height: 50px;
   background-attachment: local;
   background-size: cover;
   width: 100%;
@@ -94,3 +81,12 @@ footer {
 main {
 
 } */
+
+
+#whiteSpace {
+  height: 35px;
+}
+
+
+
+
