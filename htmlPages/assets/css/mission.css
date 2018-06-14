@@ -150,3 +150,13 @@ body, html {
     /* animation: 3s ease-out 0s 1 slideInFromRight; */
     padding-right: 15px;
   } 
+
+  /* NAV FIX FOR mission page, */
+  /* adds a minor tiled wallpaper to hide nav elements */
+  .notHeader {
+    position: relative;
+    z-index: 4;
+    background-image: url('../images/linedpaper.png');
+    background-attachment: fixed;
+    background-size: auto;
+    }

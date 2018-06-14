@@ -20,9 +20,12 @@
 
   <!-- Jquery -->
   <script src="https://code.jquery.com/jquery.js"></script>
+
   <!-- CSS
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton-framework/1.1.1/skeleton.css'>
+<link rel="stylesheet" type="text/css" href="./assets/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="./assets/css/skeleton.css">
+<link rel="stylesheet" type="text/css" href="./assets/css/nav.css">
   <link rel="stylesheet" type="text/css" href="assets/css/mission.css">
 
   <!-- Favicon
@@ -30,8 +33,58 @@
 <link rel="shortcut icon" type="image/png" href="./assets/images/marketMT.png">
 
 </head>
-
 <body>
+
+
+  <header>
+    <!-- BEGINING OF NAV SECTION -->
+
+    <div class="navbar">
+       
+      <a href="/" id="homeUrl">
+        <div class="homeIconAni">
+          <img id="homeIcon" src="./assets/images/home.png" alt="Home">
+          <span id="homeText">HOME</span>
+        </div>
+      </a>
+      <!-- if loggedout offer login, if loggedin show username -->
+      <!-- USER is dummytext -->
+      <a href="#" id="userUrl">
+        <div class="homeIconAni">
+          <img id="userIcon" src="./assets/images/usericonOP.png" alt="User">
+          <span id="userText">USER</span>
+        </div>
+      </a>
+      <a href="/all-events" id="eventUrl">
+        <div class="homeIconAni">
+          <img id="eventIcon" src="./assets/images/calendar.png" alt="User">
+          <span id="eventsText">EVENTS</span>
+        </div>
+      </a>
+      <!-- Hide if not logged in -->
+      <a href="/logout" id="logoutUrl">
+        <div class="homeIconAni">
+          <img id="exitIcon" src="./assets/images/exit.png" alt="User">
+          <span id="logoutText">LOGOUT</span>
+        </div>
+      </a>
+      <img id="navLogo" src="./assets/images/logonav.png" alt="">
+    </div>
+
+    <!-- END OF NAV SECTION -->
+  </header>
+
+  <div class="notHeader">
+    <div class="row">
+
+      <div class="twelve columns" id="whiteSpace">
+        
+     
+
+
+      </div>
+    </div>
+
 
   <div class="container">
       <div class="row">
