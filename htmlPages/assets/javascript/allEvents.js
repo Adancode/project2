@@ -36,11 +36,6 @@ $(document).ready(function () {
                 var eventDescription = $("<div>");
                 eventDescription.text(events[i].description);
 
-                var sponsorBtn = $("<button>");
-                sponsorBtn.text("Sponsor");
-                sponsorBtn.addClass("sponsor-btn");
-                sponsorBtn.attr("id", "sponsorBtn-" + events[i].id);
-
                 // EDIT AND DELETE
                 var editAndDelete = $("<div>");
                 editAndDelete.attr("id", "editAndDelete-wrapper-" + events[i].id);
@@ -48,10 +43,12 @@ $(document).ready(function () {
                 var editBtn = $("<button>");
                 editBtn.text("Edit");
                 editBtn.attr("id", "editBtn-" + events[i].id);
+                editBtn.addClass("edit-button");
 
                 var deleteBtn = $("<button>");
                 deleteBtn.text("Delete");
                 deleteBtn.attr("id", "deleteBtn-" + events[i].id);
+                deleteBtn.addClass("delete-button");
 
                 editAndDelete.append(editBtn);
                 editAndDelete.append(deleteBtn);
@@ -61,7 +58,6 @@ $(document).ready(function () {
                 eventCard.append(eventDate);
                 eventCard.append(eventLocation);
                 eventCard.append(eventDescription);
-                eventCard.append(sponsorBtn);
                 eventCard.append(editAndDelete);
 
                 listOfEvents.append(eventCard);
@@ -108,16 +104,13 @@ $(document).ready(function () {
         }
         // Create the card with an #id of event-card(events[i].id) to have a unique #id
     });
+    var theNumberItself;
     // Handle click on Sponsor, Edit, or Delete button
     $(document).on("click", ".sponsor-btn", function (event) {
         console.log("clicked");
         var theNumberId = $(this).attr("id");
         var splicedNumArray = theNumberId.split("-");
-        var theNumberItself = splicedNumArray[1];
-        // console.log("theNumberItself");
-        // console.log(theNumberItself);
-        // console.log("theNumberItself");
-        // console.log("card-" + theNumberItself);
+        theNumberItself = splicedNumArray[1];
 
         $("#sponsorBtn-" + theNumberItself).hide();
 
@@ -176,30 +169,144 @@ $(document).ready(function () {
         var vendorNameInput = $(".vendor-name-input").val().trim();
         var productNameInput = $(".product-name-input").val().trim();
         var productDescriptionInput = $(".product-description-input").val().trim();
+        var eventId = theNumberItself;
         console.log("event sponsorship clicked");
         console.log(vendorNameInput);
         console.log(productNameInput);
         console.log(productDescriptionInput);
 
-        addSponsorship(vendorNameInput, productNameInput, productDescriptionInput);
+        addSponsorship(vendorNameInput, productNameInput, productDescriptionInput, eventId);
 
         $(".vendor-name-input").val("");
         $(".product-name-input").val("");
         $(".product-description-input").val("")
     });
 
-    function addSponsorship(vendorNameInput, productNameInput, productDescriptionInput) {
+    function addSponsorship(vendorNameInput, productNameInput, productDescriptionInput, eventId) {
         $.post("/api/products", {
             vendorName: vendorNameInput,
             productName: productNameInput,
-            description: productDescriptionInput
+            description: productDescriptionInput,
+            EventId: eventId
         }).then(function(data) {
             console.log(data);
         });
     }
-
+    // Cancel Sponsor Button
     $(document).on("click", ".cancel-btn", function(event) {
         console.log("cancelBtn");
+        $("#sponsorBtn-" + theNumberItself).show();
         sponsorArea.hide();
+    });
+    var theNumberItselfEdit;
+    $(document).on("click", ".edit-button", function(event) {
+        console.log("An event btn clicked");
+        var theNumberIdEdit = $(this).attr("id");
+        var splicedNumArrayEdit = theNumberIdEdit.split("-");
+        theNumberItselfEdit = splicedNumArrayEdit[1];
+
+        $("#editAndDelete-wrapper-" + theNumberItselfEdit).hide();
+
+        console.log("sponsorBtn-" + theNumberItselfEdit);
+
+        var rowEditName = $("<div>");
+        rowEditName.addClass("row");
+
+        var rowEditDate = $("<div>");
+        rowEditDate.addClass("row");
+
+        var rowEditLocation = $("<div>");
+        rowEditLocation.addClass("row");
+
+        var rowEditDescription = $("<div>");
+        rowEditDescription.addClass("row");
+
+        var rowButtons = $("<div>");
+        rowButtons.addClass("row");
+
+        var editEvent = $("<div>");
+        editEvent.attr("id", "editEventArea-" + theNumberItselfEdit);
+
+        var editEventName = $("<input>");
+        editEventName.attr("type", "text");
+
+        var editEventDate = $("<input>");
+        editEventDate.attr("type", "date");
+
+        var editEventLocation = $("<input>");
+        editEventLocation.attr("type", "text");
+
+        var editEventDescription = $("<textarea>");
+        editEventDescription.attr("type", "text");
+
+        var saveEditBtn = $("<button>");
+        saveEditBtn.text("Save");
+
+        var cancelEditBtn = $("<button>");
+        cancelEditBtn.text("Cancel");
+        cancelEditBtn.addClass("cancel-edit-button");
+
+        rowEditName.append(editEventName);
+        rowEditDate.append(editEventDate);
+        rowEditLocation.append(editEventLocation);
+        rowEditDescription.append(editEventDescription);
+        rowButtons.append(saveEditBtn);
+        rowButtons.append(cancelEditBtn);
+
+        editEvent.append(rowEditName);
+        editEvent.append(rowEditDate);
+        editEvent.append(rowEditLocation);
+        editEvent.append(rowEditDescription);
+        editEvent.append(rowButtons);
+
+        var editCardDiv = $("#card-" + theNumberItselfEdit);
+        editCardDiv.append(editEvent);
+    });
+
+    $(document).on("click", ".cancel-edit-button", function(event) {
+        console.log("cancel the edit clicked");
+        console.log("editEventArea-" + theNumberItselfEdit);
+        $("#editEventArea-" + theNumberItselfEdit).hide();
+        $("#editAndDelete-wrapper-" + theNumberItselfEdit).show();
+    });
+
+    var theNumberItselfDelete;
+    $(document).on("click", ".delete-button", function(event) {
+        event.preventDefault();
+        console.log("delete was clicked");
+        var theNumberIdDelete = $(this).attr("id");
+        var splicedNumArrayDelete = theNumberIdDelete.split("-");
+        theNumberItselfDelete = splicedNumArrayDelete[1];
+
+        $("#deleteBtn-" + theNumberItselfDelete).hide();
+        $("#editBtn-" + theNumberItselfDelete).hide();
+
+        var yesAndNo = $("<div>");
+        yesAndNo.addClass("yes-and-no");
+
+        var areYouSure = $("<p>");
+        areYouSure.text("Are You Sure?");
+
+        var yesBtn = $("<button>");
+        yesBtn.text("Yes");
+        yesBtn.addClass("yes-delete");
+
+        var noBtn = $("<button>");
+        noBtn.text("No");
+        noBtn.addClass("no-delete");
+
+        yesAndNo.append(areYouSure);
+        yesAndNo.append(yesBtn);
+        yesAndNo.append(noBtn);
+
+        var cardDiv = $("#card-" + theNumberItselfDelete);
+        cardDiv.append(yesAndNo);
+    });
+
+    $(document).on("click", ".no-delete", function(event) {
+        console.log("no was clicked");
+        $(".yes-and-no").hide();
+        $("#deleteBtn-" + theNumberItselfDelete).show();
+        $("#editBtn-" + theNumberItselfDelete).show();
     });
 });
