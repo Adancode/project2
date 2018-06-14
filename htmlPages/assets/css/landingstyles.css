@@ -6,14 +6,30 @@ body, html {
   color: #000;
 }
 
-
-
-.notHeader {
-  background-image: url('../images/test.jpg');
-  background-size: cover;
+#whatIsMarketToMarket {
+  font-size: 1.4em;
+  color: #FFEDE5;
+  text-shadow: #fff 1px 1px, 0 0 25px white, 0 0 10px rgb(141, 137, 135);
+  background-color: rgba(218, 224, 233, 0);
+  border-radius: 15px;
+  
+}
+#missionButton {
+  color: #fff;
+  background: rgba(19, 17, 17, 0.322);
+ }
+header {
   width: 100%;
-  height: 100%;
-  color: rgb(0, 0, 0);
+  height: 30px;
+}
+.notHeader {
+  position: relative;
+  z-index: 4;
+  background-image: url('../images/all-events.png');
+  background-attachment: fixed;
+  background-size: contain;
+  width: 100%;
+  height: 40%;
   display: flex;
   text-align: center;
   align-content: center;
