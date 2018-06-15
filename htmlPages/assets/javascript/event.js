@@ -49,9 +49,6 @@ $(document).ready(function () {
             console.log(data);
             // Redirecting the user to the all-events page
             window.location.replace("/all-events");
-        }).catch(function (err) {
-            // If an error occurs log it in the console
-            console.log(err);
         });
     };
 });

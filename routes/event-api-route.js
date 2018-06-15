@@ -25,6 +25,15 @@ module.exports = function (app) {
     });
   });
 
+  // app.get("/api/events/:id", function (req, res) {
+  //   db.Event.findAll({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function(result){
+  //     res.json(result);
+  //   });
+  // });
 
   app.post("/api/events", function (req, res) {
     console.log(req.user);

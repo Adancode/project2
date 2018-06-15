@@ -164,7 +164,7 @@ $(document).ready(function () {
         cardDiv.append(sponsorArea);
     });
 
-    $(document).on("click", ".event-sponsorship", function(event) {
+    $(document).on("click", ".event-sponsorship", function (event) {
         event.preventDefault();
         var vendorNameInput = $(".vendor-name-input").val().trim();
         var productNameInput = $(".product-name-input").val().trim();
@@ -188,18 +188,18 @@ $(document).ready(function () {
             productName: productNameInput,
             description: productDescriptionInput,
             EventId: eventId
-        }).then(function(data) {
+        }).then(function (data) {
             console.log(data);
         });
     }
     // Cancel Sponsor Button
-    $(document).on("click", ".cancel-btn", function(event) {
+    $(document).on("click", ".cancel-btn", function (event) {
         console.log("cancelBtn");
         $("#sponsorBtn-" + theNumberItself).show();
         sponsorArea.hide();
     });
     var theNumberItselfEdit;
-    $(document).on("click", ".edit-button", function(event) {
+    $(document).on("click", ".edit-button", function (event) {
         console.log("An event btn clicked");
         var theNumberIdEdit = $(this).attr("id");
         var splicedNumArrayEdit = theNumberIdEdit.split("-");
@@ -229,18 +229,26 @@ $(document).ready(function () {
 
         var editEventName = $("<input>");
         editEventName.attr("type", "text");
+        editEventName.attr("placeholder", "Event Name");
+        editEventName.attr("id", "editEventName-" + theNumberItselfEdit);
 
         var editEventDate = $("<input>");
         editEventDate.attr("type", "date");
+        editEventDate.attr("id", "editEventDate-" + theNumberItselfEdit);
 
         var editEventLocation = $("<input>");
         editEventLocation.attr("type", "text");
+        editEventLocation.attr("placeholder", "Event Location");
+        editEventLocation.attr("id", "editEventLocation-" + theNumberItselfEdit);
 
         var editEventDescription = $("<textarea>");
         editEventDescription.attr("type", "text");
+        editEventDescription.attr("placeholder", "Event Description");
+        editEventDescription.attr("id", "editEventDescription-" + theNumberItselfEdit);
 
         var saveEditBtn = $("<button>");
         saveEditBtn.text("Save");
+        saveEditBtn.addClass("save-edit-button");
 
         var cancelEditBtn = $("<button>");
         cancelEditBtn.text("Cancel");
@@ -263,15 +271,52 @@ $(document).ready(function () {
         editCardDiv.append(editEvent);
     });
 
-    $(document).on("click", ".cancel-edit-button", function(event) {
+    $(document).on("click", ".cancel-edit-button", function (event) {
         console.log("cancel the edit clicked");
         console.log("editEventArea-" + theNumberItselfEdit);
         $("#editEventArea-" + theNumberItselfEdit).hide();
         $("#editAndDelete-wrapper-" + theNumberItselfEdit).show();
     });
 
+    $(document).on("click", ".save-edit-button", function (event) {
+        console.log("Save was clicked");
+        getWhereId(theNumberItselfEdit);
+    });
+
+    function getWhereId(id) {
+        console.log(id);
+        $.get("/api/all-events/" + id, function (data) {
+            if (data) {
+                console.log(data);
+                var newEventName = $("#editEventName-" + theNumberItselfEdit).val().trim();
+                var newEventDate = $("#editEventDate-" + theNumberItselfEdit).val().trim();
+                var newEventLocation = $("#editEventLocation-" + theNumberItselfEdit).val().trim();
+                var newEventDescription = $("#editEventDescription-" + theNumberItselfEdit).val().trim();
+                updatedData = {
+                    eventName: newEventName,
+                    date: newEventDate,
+                    location: newEventLocation,
+                    description: newEventDescription
+                }
+                updateEvent(updatedData);
+            }
+        });
+    }
+
+    function updateEvent(updatePost) {
+        console.log(updatePost);
+        $.ajax({
+            url: "/api/all-events",
+            method: "PUT",
+            data: updatePost
+        }).then(function (data) {
+            console.log(data);
+            window.location.href = "/all-events";
+        });
+    }
+
     var theNumberItselfDelete;
-    $(document).on("click", ".delete-button", function(event) {
+    $(document).on("click", ".delete-button", function (event) {
         event.preventDefault();
         console.log("delete was clicked");
         var theNumberIdDelete = $(this).attr("id");
@@ -303,7 +348,27 @@ $(document).ready(function () {
         cardDiv.append(yesAndNo);
     });
 
-    $(document).on("click", ".no-delete", function(event) {
+    $(document).on("click", ".yes-delete", function (event) {
+        console.log("Delete yes clicked");
+        deleteEvent(theNumberItselfDelete);
+    });
+
+    function deleteEvent(id) {
+        $.get("/api/all-events/" + id, function (data) {
+            if (data) {
+                console.log(data.id);
+                $.ajax({
+                    method: "DELETE",
+                    url: "/api/all-events/" + id
+                }).then(function (data) {
+                    console.log(data);
+                    window.location.href = "/all-events";
+                });
+            }
+        });
+    }
+
+    $(document).on("click", ".no-delete", function (event) {
         console.log("no was clicked");
         $(".yes-and-no").hide();
         $("#deleteBtn-" + theNumberItselfDelete).show();
