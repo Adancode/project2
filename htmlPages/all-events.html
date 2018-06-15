@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
      <!-- Jquery -->
   <script src="https://code.jquery.com/jquery.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:500" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/skeleton.css">
  
     <link rel="stylesheet" type="text/css" href="./assets/css/nav.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/allevents.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/cards.css">
     <title>Market to Market</title>
     <link rel="icon" type="image/png" href="./assets/images/marketMT.png">
 </head>
@@ -84,18 +85,21 @@
     </div>
   </div>
   <br>
-
-    <main>
+ 
+    <main>   
         <div class="container">
+        
             <div class="row">
+          
                 <div id="eventsCard">
-                    <h3>Current Events</h3>
-                    <div class="container" id="eventList"></div>
+            
+                    <div class="container" id="eventList">   <img id="currentEventLogo" src="./assets/images/currentevents.png" alt="Current Events">   </div>
                 </div>
             </div>
         </div>
     </main>
-    <script src="/assets/javascript/allEvents.js"></script>
+    <script src="./assets/javascript/allEvents.js"></script>
+    <script src="./assets/javascript/cards.js"></script>
 </body>
 
 </html>
