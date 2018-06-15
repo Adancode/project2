@@ -33,6 +33,7 @@ footer {
 #eventSubmitBtn:hover {
   background-color: #fedede;
 }
+
 .notHeader {
   position: relative;
   z-index: 4;
