@@ -55,7 +55,7 @@ db.sequelize.sync({
   force: true
 }).then(function () {
   app.listen(PORT, function () {
-    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT);
   });
   db.User.create({
     "username": "usernameTest",
