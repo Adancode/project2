@@ -25,15 +25,8 @@ module.exports = function (app) {
     });
   });
 
-  // app.get("/api/events/:id", function (req, res) {
-  //   db.Event.findAll({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function(result){
-  //     res.json(result);
-  //   });
-  // });
+  
+
 
   app.post("/api/events", function (req, res) {
     console.log(req.user);
@@ -44,7 +37,8 @@ module.exports = function (app) {
       eventName: req.body.eventName,
       date: req.body.date,
       location: req.body.location,
-      description: req.body.description
+      description: req.body.description,
+      userEmail: req.user.email
     }).then(function (result) {
       res.json(result);
     }).catch(function (err) {

@@ -21,7 +21,7 @@ $(document).ready(function () {
             // Checking if the currentUser is the one that created the event
             if (events[i].UserId === currentUser) {
 
-                var eventCard = $("<div>");
+                var eventCard = $("<div data-email='"+events[i].userEmail+"'>");
                 eventCard.attr("id", "card-" + events[i].id);
 
                 var eventName = $("<div>");
@@ -65,7 +65,7 @@ $(document).ready(function () {
             // ELSE
             else {
 
-                var eventCard = $("<div>");
+                var eventCard = $("<div data-email='"+events[i].userEmail+"'>");
                 eventCard.attr("id", "card-" + events[i].id);
 
                 var eventName = $("<div>");
@@ -127,6 +127,8 @@ $(document).ready(function () {
         sponsorArea = $("<div>");
         sponsorArea.attr("id", "sponsorArea-" + theNumberItself);
 
+        var vendorForm = $("<form method='POST' action='contact' role+'form'>");
+        
         var vendorName = $("<input>");
         vendorName.attr("type", "text");
         vendorName.attr("placeholder", "Vendor Name");
@@ -137,12 +139,18 @@ $(document).ready(function () {
         productName.attr("placeholder", "Product Name");
         productName.addClass("product-name-input");
 
+        var vendorEmail = $("<input>");
+        vendorEmail.attr("type", "text");
+        vendorEmail.attr("id", "vendorEmail");
+        vendorEmail.attr("placeholder", "Vendor e-mail");
+        vendorEmail.addClass("vendor-email-input");
+
         var productDescription = $("<textarea>");
         productDescription.attr("type", "text");
         productDescription.attr("placeholder", "Description");
         productDescription.addClass("product-description-input");
 
-        var eventSponsorshipBtn = $("<button>");
+        var eventSponsorshipBtn = $("<button type='submit'>");
         eventSponsorshipBtn.text("Sponsor Event");
         eventSponsorshipBtn.addClass("event-sponsorship");
 
@@ -152,13 +160,16 @@ $(document).ready(function () {
 
         rowVendorAndProduct.append(vendorName);
         rowVendorAndProduct.append(productName);
+        rowVendorAndProduct.append(vendorEmail);
         rowDescription.append(productDescription);
         rowButton.append(eventSponsorshipBtn);
         rowButton.append(cancelBtn);
 
-        sponsorArea.append(rowVendorAndProduct);
-        sponsorArea.append(rowDescription);
-        sponsorArea.append(rowButton);
+        vendorForm.append(rowVendorAndProduct);
+        vendorForm.append(rowDescription);
+        vendorForm.append(rowButton);
+
+        sponsorArea.append(vendorForm);
 
         var cardDiv = $("#card-" + theNumberItself);
         cardDiv.append(sponsorArea);
@@ -168,19 +179,36 @@ $(document).ready(function () {
         event.preventDefault();
         var vendorNameInput = $(".vendor-name-input").val().trim();
         var productNameInput = $(".product-name-input").val().trim();
+        var vendorEmailInput = $(".vendor-email-input").val().trim();
         var productDescriptionInput = $(".product-description-input").val().trim();
         var eventId = theNumberItself;
         console.log("event sponsorship clicked");
         console.log(vendorNameInput);
         console.log(productNameInput);
         console.log(productDescriptionInput);
+        console.log(vendorEmailInput);
 
         addSponsorship(vendorNameInput, productNameInput, productDescriptionInput, eventId);
+        
+        email(vendorNameInput, productNameInput, vendorEmailInput, productDescriptionInput);
 
         $(".vendor-name-input").val("");
         $(".product-name-input").val("");
         $(".product-description-input").val("")
     });
+// function to call the API post.
+    function email(vendorNameInput, productNameInput, vendorEmailInput, productDescriptionInput){
+        $.post("/contact", {
+                from: 'Market to Market <postmaster@sandbox5220afbde8c34d7b823a5aee1c709219.mailgun.org>',
+                to: "tobross@gmail.com",
+                vendor: "<b style='color:green'>From: "+vendorNameInput,
+                product: "<b style='color:green'>Product: "+productNameInput,
+                vendorEmail: "<b style='color:green'>Respond to: "+vendorEmailInput,
+                text: "<b style='color:green'>Message: "+productDescriptionInput
+    }).then(function(data){
+        console.log(data);
+    });
+};
 
     function addSponsorship(vendorNameInput, productNameInput, productDescriptionInput, eventId) {
         $.post("/api/products", {

@@ -1,5 +1,7 @@
 html,header{
   font-family: 'Raleway';
+  background-image: url("../images/linedpaper_@2x.png");
+  background-size: auto;
 }
 #logoBox {
   width: 30vw;
@@ -33,6 +35,12 @@ font-size: 1.1em;
 #createButton {
   color: rgb(255, 255, 255);
   background-color: rgba(10, 10, 10, 0.233);
+}
+.currentEventLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .cardWrpper {
