@@ -29,7 +29,7 @@ $(document).ready(function () {
     // Tracks the route of the business vendor wrappper when user is not logged in
     $("#vendorBox").on("click", function () {
         console.log("vendorDivClicked");
-        $.get("/api/route-getter/vendor", function (result) {
+        $.get("/api/route-getter/all-events", function (result) {
             console.log("result from api/rpute-getter/vendor");
             console.log(result);
             console.log("result from api/rpute-getter/vendor");
@@ -38,7 +38,7 @@ $(document).ready(function () {
     // Tracks the route of the all-events button when user is not logged in
     $("#eventUrl").on("click", function () {
         console.log("navAllEventsButtonClicked");
-        $.get("/api/route-getter/all-events", function (result) {
+        $.get("/api/route-getter/event", function (result) {
             console.log("result from api/rpute-getter/all-events");
             console.log(result);
             console.log("result from api/rpute-getter/all-events");
