@@ -1,5 +1,6 @@
 var api_key = 'key-9b7e5c8f456d2e2af3a4ca35a1ef9a95-47317c98-35df1b95';
 var domain = 'sandbox5220afbde8c34d7b823a5aee1c709219.mailgun.org';
+var app = require("sequelize");
 var mailgun = require('mailgun-js')({
     apiKey: api_key,
     domain: domain
