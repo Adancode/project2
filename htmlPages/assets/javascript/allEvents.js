@@ -321,6 +321,7 @@ $(document).ready(function () {
                 var newEventLocation = $("#editEventLocation-" + theNumberItselfEdit).val().trim();
                 var newEventDescription = $("#editEventDescription-" + theNumberItselfEdit).val().trim();
                 updatedData = {
+                    id: theNumberItselfEdit,
                     eventName: newEventName,
                     date: newEventDate,
                     location: newEventLocation,
